@@ -1,6 +1,6 @@
 
 import sys
-from interpreter import token
+from boombash import token
 
 
 class Parser:
@@ -21,16 +21,12 @@ class Parser:
             if tokens[index].Type == token.LPAREN:
                 next_remaining , next_representation = self.parse(tokens[index+1:])
                 representation.append(next_representation)
-                # if next_remaining:
-                #     print(next_remaining)
-                #     representation.extend(self.parse(next_remaining)[1])
                 tokens = next_remaining
                 index = 0
                 continue
             elif tokens[index].Type == token.RPAREN:
                 return tokens[index+1:] , representation
             else:
-                print(tokens[index])
                 representation.append(tokens[index])
             index += 1
 

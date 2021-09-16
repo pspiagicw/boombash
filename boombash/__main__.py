@@ -1,4 +1,4 @@
-from interpreter import repl
+from boombash import repl
 
 
 if __name__ == '__main__':
