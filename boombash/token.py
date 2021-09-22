@@ -31,6 +31,13 @@ class Token:
         return "Token[ Type =  '{type}' , Literal= '{literal}' ]".format(type=self.Type , literal = self.Literal)
     def __repr__(self):
         return "Token[ Type =  '{type}' , Literal= '{literal}' ]".format(type=self.Type , literal = self.Literal)
+    def __eq__(self , other):
+        if isinstance(other , Token) :
+            if self.Type == other.Type and self.Literal == other.Literal:
+                return True
+        if self.Literal == other:
+            return True
+        return False
     
 
 

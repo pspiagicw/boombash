@@ -1,6 +1,4 @@
 from boombash import token
-
-
 class Tokenizer:
     """This class gives token depending on input"""
     def __init__(self,input):
@@ -60,6 +58,8 @@ class Tokenizer:
             token_instance = token.Token(Type = token.STRING , Literal = string)
         elif char == '=':
             token_instance = token.Token(Type = token.EQ , Literal = char)
+        elif char == '%':
+            token_instance = token.Token(Type = token.MOD , Literal = char)
         return token_instance
 
     def read_string(self):
