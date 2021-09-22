@@ -1,15 +1,35 @@
 * BoomBash
-  BoomBash is teeny-tiny lisp interpreter designed to interface with Bash to provide shell commands withing BoomBash.Implemented in Pure Python , this uses no external libraries.
+  BoomBash is teeny-tiny lisp interpreter designed to interface with Bash to provide shell commands withing BoomBash.
+  Implemented in Pure Python , this uses no external libraries.
   
   This is valid syntax in BoomBash.
+  
+  #+begin_src emacs-lisp
+(output (+ 3 1 ))
+  #+end_src
+  
+  #+begin_src emacs-lisp
+(defun greet ( name ) ( output ( get name )))
+  #+end_src
 
 
+** Current Progress
+   Currently language is still in building phase.
+   Features needed
+   
+   - [ ] Booleans
+   - [ ] Documentation
+   - [ ] More Tests
+   - [ ] Interface with Bash
+   - [ ] Type System
+   - [ ] Variable Reference
+   - [ ] Support for loading files
+   - [ ] Support for Executing Files
 
 ** The Features include
   - Integers , Strings , Booleans
   - Define functions and variables
-  - Write Lispy Bash!
-** Missing Features(To be included)
-  - Importing other files (Make a tiny standard library!)
-  - Some OOP Concepts
+  
+** Written in Python
 
+    
