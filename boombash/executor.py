@@ -14,8 +14,11 @@ class Executor:
     def exec(self,data=None , args = None):
         if data == None:
             data = self.code
-        if not isinstance(data,list):
-            return data.Literal
+        if isinstance(data,token.Token):
+            if data.Type == token.RETRIEVE:
+                return self.exec(self.variables[data.Literal])
+            else:
+                return data.Literal
         if self.argument_structure:
             assert len(self.argument_structure) == len(args) , "No of arguments differ"
             for i in range(len(args)):
@@ -59,7 +62,7 @@ class Executor:
             self.variables[self.exec(data[1])] = self.exec(data[2] , args=args)
         if operator.Type == token.GET:
             assert len(data) == 2 , "Get function expects 1 arguments"
-            return self.variables[self.exec(data[1] , args=args)]
+            return self.exec(self.variables[self.exec(data[1] , args=args)])
         if operator.Type == token.DEFUN:
             assert len(data) == 4 , "Function expects 3 arguments"
             for arg in data[2]:
@@ -69,3 +72,11 @@ class Executor:
             if self.exec(operator) in self.functions:
                 self.functions
                 self.functions[self.exec(operator)].exec(args=data[1:])
+        if operator.Type == token.EX:
+            command = list()
+            for i in data[1:]:
+                command.append(self.exec(i , args=args))
+            executed_process = subprocess.run(command,capture_output=True,text=True)
+            output = executed_process.stdout
+            return output
+                

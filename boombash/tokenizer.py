@@ -30,6 +30,9 @@ class Tokenizer:
             token_instance = token.Token(Type = token.PLUS , Literal = char)
         elif char == '-':
             token_instance = token.Token(Type = token.MINUS , Literal = char)
+        elif char == '$':
+            ident = self.read_variable()
+            token_instance = token.Token(Type = token.RETRIEVE , Literal = ident[1:])
         elif char.isalpha():
             ident = self.read_identifier()
             if ident == token.OUTPUT:
@@ -44,6 +47,8 @@ class Tokenizer:
                 token_instance = token.Token(Type = token.GET , Literal = ident)
             elif ident == token.DEFUN:
                 token_instance = token.Token(Type = token.DEFUN , Literal = ident)
+            elif ident == token.EX:
+                token_instance = token.Token(Type = token.EX , Literal = ident)
             else:
                 token_instance = token.Token(Type = token.IDENT , Literal = ident)
         elif char.isnumeric():
@@ -83,6 +88,18 @@ class Tokenizer:
         ident = self.input[oldposition:self.read_position]
         return ident
             
+    def read_variable(self):
+        oldposition = self.current_position
+        char = self.input[self.current_position]
+        while (char.isalpha() or char == '$') and self.read_position < len(self.input):
+            if self.input[self.read_position].isalpha():
+                self.move_position()
+            else:
+                break
+            char = self.input[self.current_position]
+        ident = self.input[oldposition:self.read_position]
+        return ident
+
     def read_number(self):
         oldposition = self.current_position
         char = self.input[self.current_position]

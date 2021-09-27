@@ -15,10 +15,11 @@ STRING = 'STRING'
 LIST = 'LIST'
 IF = 'if'
 WHILE = 'while'
+EX = 'ex'
 OUTPUT = 'output'
 VAR = 'var'
 GET = 'get'
-
+RETRIEVE = 'RETREIVE'
 
 EOF = 'EOF'
 
