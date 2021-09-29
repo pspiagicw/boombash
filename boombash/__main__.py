@@ -1,5 +1,5 @@
-from boombash import repl
-
+from boombash import loader, repl
 
 if __name__ == "__main__":
-    repl.start()
+    # repl.start()
+    loader.load("tests/scripts/test.bm")

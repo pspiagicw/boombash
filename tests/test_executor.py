@@ -1,8 +1,6 @@
 from unittest import TestCase
 
-from boombash import executor
-from boombash import parser
-from boombash import tokenizer
+from boombash import executor, parser, tokenizer
 
 
 class TestExecutor(TestCase):

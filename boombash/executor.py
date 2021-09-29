@@ -1,7 +1,6 @@
 import subprocess
-from boombash import token
-from boombash import print_module
-from boombash import token
+
+from boombash import print_module, token
 
 
 class Executor:

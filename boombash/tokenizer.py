@@ -17,20 +17,27 @@ class Tokenizer:
             self.EOF = True
 
     def eat_space(self):
-        char = self.input[self.current_position]
-        while not self.EOF and self.input[self.current_position] in [
-            "\n",
-            "\t ",
-            " ",
-            "\r",
-        ]:
+        char = None
+        if not self.EOF:
+            char = self.input[self.current_position]
+        while (not self.EOF) and (
+            char
+            in [
+                "\n",
+                "\t ",
+                " ",
+                "\r",
+            ]
+        ):
             self.move_position()
+            if not self.EOF:
+                char = self.input[self.current_position]
 
     def next_token(self):
         self.move_position()
+        self.eat_space()
         if self.EOF:
             return token.Token(Type=token.EOF, Literal="EOF")
-        self.eat_space()
         char = self.input[self.current_position]
         token_instance = None
         if char == "(":

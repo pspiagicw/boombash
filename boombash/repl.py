@@ -1,8 +1,6 @@
 import pprint
-from boombash import token
-from boombash import parser
-from boombash import executor
-from boombash import tokenizer
+
+from boombash import executor, parser, token, tokenizer
 
 PROMPT = ">>> "
 
