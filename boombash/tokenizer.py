@@ -53,8 +53,8 @@ class Tokenizer:
             token_instance = token.Token(Type=token.RETRIEVE, Literal=ident[1:])
         elif char.isalpha():
             ident = self.read_identifier()
-            if ident == token.OUTPUT:
-                token_instance = token.Token(Type=token.OUTPUT, Literal=ident)
+            if ident == token.PRINT:
+                token_instance = token.Token(Type=token.PRINT, Literal=ident)
             elif ident == token.IF:
                 token_instance = token.Token(Type=token.IF, Literal=ident)
             elif ident == token.WHILE:

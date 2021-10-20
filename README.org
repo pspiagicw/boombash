@@ -22,13 +22,11 @@
    - [ ] More Tests
    - [ ] Interface with Bash
    - [ ] Type System
-   - [ ] Variable Reference
-   - [ ] Support for loading files
-   - [ ] Support for Executing Files
+   - [x] Variable Reference
+   - [x] Support for loading files
+   - [x] Support for Executing Files
 
 ** The Features include
-  - Integers , Strings , Booleans
-  - Define functions and variables
   
 ** Written in Python
 

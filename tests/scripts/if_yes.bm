@@ -1,4 +1,4 @@
 (if (= 3 3 )
-    (output 'Yes')
-  (output 'No')
+    (print 'Yes')
+  (print 'No')
  )

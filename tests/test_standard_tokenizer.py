@@ -215,12 +215,12 @@ class TestStandardTokenizer(TestCase):
             self.assertEqual(given_token.Literal, ideal_token.Literal)
 
     def test_standard_token_15(self):
-        input = "( output )"
+        input = "( print )"
         tokenizer_instance = tokenizer.Tokenizer(input)
 
         tests = [
             token.Token(Type=token.LPAREN, Literal="("),
-            token.Token(Type=token.OUTPUT, Literal="output"),
+            token.Token(Type=token.PRINT, Literal="print"),
             token.Token(Type=token.RPAREN, Literal=")"),
         ]
         for i in range(len(tests)):

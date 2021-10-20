@@ -50,7 +50,7 @@ class Executor:
             return int(self.exec(data[1], args=args)) % int(
                 self.exec(data[2], args=args)
             )
-        if operator.Type == token.OUTPUT:
+        if operator.Type == token.PRINT:
             assert len(data) == 2, "Type function expects 1 argument"
             print_module.stdout(self.exec(data[1], args=args))
         if operator.Type == token.EQ:

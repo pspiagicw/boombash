@@ -1,4 +1,4 @@
 (defun greet (name)
-  (output $name)
+  (print $name)
  )
 (greet 'Pratham')
