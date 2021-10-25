@@ -3,7 +3,6 @@ from boombash import token
 
 class Tokenizer:
     """This class gives token depending on input"""
-
     def __init__(self, input):
         self.input = input
         self.current_position = -1
@@ -67,6 +66,14 @@ class Tokenizer:
                 token_instance = token.Token(Type=token.DEFUN, Literal=ident)
             elif ident == token.EX:
                 token_instance = token.Token(Type=token.EX, Literal=ident)
+            elif ident == token.LT:
+                token_instance = token.Token(Type=token.LT, Literal=ident)
+            elif ident == token.GT:
+                token_instance = token.Token(Type=token.GT, Literal=ident)
+            elif ident == token.LE:
+                token_instance = token.Token(Type=token.LE, Literal=ident)
+            elif ident == token.GE:
+                token_instance = token.Token(Type=token.GE, Literal=ident)
             else:
                 token_instance = token.Token(Type=token.IDENT, Literal=ident)
         elif char.isnumeric():

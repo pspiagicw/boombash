@@ -7,7 +7,13 @@ MINUS = "-"
 MULTIPLY = "*"
 DIVIDE = "/"
 MOD = "%"
-EQ = "="
+
+EQ = "eq"
+LT = 'lt'
+LE = 'le'
+GE = 'ge'
+GT = 'gt'
+
 
 IDENT = "IDENT"
 INT = "INT"

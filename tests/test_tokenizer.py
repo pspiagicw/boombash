@@ -300,3 +300,22 @@ class TestTokenizer(TestCase):
             ideal_token = tests[i]
             self.assertEqual(given_token.Type, ideal_token.Type)
             self.assertEqual(given_token.Literal, ideal_token.Literal)
+    def test_comparator_operators(self):
+        input = '( le gt lt ge )'
+        tokenizer_instance = tokenizer.Tokenizer(input)
+
+        tests = [
+            token.Token(Type=token.LPAREN, Literal="("),
+            token.Token(Type=token.LE , Literal='le'),
+            token.Token(Type=token.GT , Literal='gt'),
+            token.Token(Type=token.LT , Literal='lt'),
+            token.Token(Type=token.GE , Literal='ge'),
+            token.Token(Type=token.RPAREN, Literal=")"),
+            ]
+        for i in range(len(tests)):
+            given_token = tokenizer_instance.next_token()
+            ideal_token = tests[i]
+            self.assertEqual(given_token.Type, ideal_token.Type)
+            self.assertEqual(given_token.Literal, ideal_token.Literal)
+        
+            
