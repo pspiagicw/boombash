@@ -9,10 +9,10 @@ DIVIDE = "/"
 MOD = "%"
 
 EQ = "eq"
-LT = 'lt'
-LE = 'le'
-GE = 'ge'
-GT = 'gt'
+LT = "lt"
+LE = "le"
+GE = "ge"
+GT = "gt"
 
 
 IDENT = "IDENT"

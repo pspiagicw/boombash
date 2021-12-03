@@ -3,6 +3,7 @@ from boombash import token
 
 class Tokenizer:
     """This class gives token depending on input"""
+
     def __init__(self, input):
         self.input = input
         self.current_position = -1

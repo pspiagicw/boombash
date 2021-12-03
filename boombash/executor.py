@@ -13,6 +13,7 @@ class Executor:
         self.argument_structure = argument_structure
 
     def exec(self, data=None, args=None):
+        "This function executes arbitary code"
         if data == None:
             data = self.code
         if isinstance(data, token.Token):
