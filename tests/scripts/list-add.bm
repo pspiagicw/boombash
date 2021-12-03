@@ -1,0 +1,3 @@
+(var i [2 3 4])
+(ladd i 5)
+(print $i 5)

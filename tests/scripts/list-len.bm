@@ -1,0 +1,4 @@
+(print (len [2 3 4]))
+(print (len [2 3 4 3 4 1 2 3]))
+(print (len [2 3 4 1]))
+(print (len [22 33 451 332 47 13 32 35]))

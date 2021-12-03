@@ -1,0 +1,7 @@
+(var i 4)
+(while (> $i 2)
+  (do
+   (print 'Hello')
+   (var i (- i 1))
+   )
+  )

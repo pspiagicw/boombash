@@ -1,0 +1,5 @@
+(var i 3)
+(if (= $var 4)
+    (print "Yes")
+  (print "No")
+)

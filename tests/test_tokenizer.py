@@ -336,3 +336,17 @@ class TestTokenizer(TestCase):
             ideal_token = tests[i]
             self.assertEqual(given_token.Type, ideal_token.Type)
             self.assertEqual(given_token.Literal, ideal_token.Literal)
+    def test_comparator_symbols(self):
+        input = "(<>>=<==)"
+        tokenizer_instance = tokenizer.Tokenizer(input)
+    
+        tests = [
+            token.Token(Type=token.LPAREN, Literal="("),
+            token.Token(Type=token.SLT , Literal="<"),
+            token.Token(Type=token.SGT , Literal=">"),
+            token.Token(Type=token.SLE , Literal="<="),
+            token.Token(Type=token.SGE , Literal=">="),
+            token.Token(Type=token.SEQ , Literal="="),
+            token.Token(Type=token.RPAREN, Literal=")"),
+        ]
+

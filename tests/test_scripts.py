@@ -39,16 +39,36 @@ class TestStandardScripts(TestCase):
         output = self.get_output(script_location)
         self.assertEqual(output, "Pratham\n")
 
-    # def test_fibonacci(self):
-    #     script_location = 'tests/scripts/fibonacci.bm'
-    #     output = self.get_output(script_location)
-    #     self.assertEqual(output, 'No\n')
-    # def test_variables(self):
-    #     script_location = 'tests/scripts/varible.bm'
-    #     output = self.get_output(script_location)
-    #     self.assertEqual(output, 'No\n')
+    def test_fibonacci(self):
+        script_location = 'tests/scripts/fibonacci.bm'
+        output = self.get_output(script_location)
+        self.assertEqual(output, 'No\n')
+    def test_variables(self):
+        script_location = 'tests/scripts/variable.bm'
+        output = self.get_output(script_location)
+        self.assertEqual(output, 'No\n')
 
-    # def test_while(self):
-    #     script_location = 'tests/scripts/while.bm'
-    #     output = self.get_output(script_location)
-    #     self.assertEqual(output, 'No\n')
+    def test_while(self):
+        script_location = 'tests/scripts/while.bm'
+        output = self.get_output(script_location)
+        self.assertEqual(output, 'Hello\nHello\n')
+
+    def test_list(self):
+        script_location = 'tests/scripts/list.bm'
+        output = self.get_output(script_location)
+        self.assertEqual(output , '[1 2 3]\n')
+        
+    def test_list_get(self):
+        script_location = 'tests/scripts/list-get.bm'
+        output = self.get_output(script_location)
+        self.assertEqual(output , '2\n')
+
+    def test_list_add(self):
+        script_location = 'tests/scripts/list-add.bm'
+        output = self.get_output(script_location)
+        self.assertEqual(output , '5\n')
+
+    def test_list_len(self):
+        script_location = 'tests/scripts/list-len.bm'
+        output = self.get_output(script_location)
+        self.assertEqual(output , '3\n8\n5\n8\n')
