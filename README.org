@@ -1,33 +1,86 @@
 * BoomBash
-  BoomBash is teeny-tiny lisp interpreter designed to interface with Bash to provide shell commands withing BoomBash.
-  Implemented in Pure Python , this uses no external libraries.
+BoomBash is teeny-tiny lisp interpreter designed to interface with Bash to provide shell commands within BoomBash.
+Implemented in Pure Python , this uses no external libraries.
+
+** Motivation
+Writing bash scripts is very cool , but there is no functional alternative to Bash. Just as Clojure is for Java,
+F# for C# , Hy for Python. BoomBash is built for being a functional sibling to Bash.
+
+The syntax is a mix between Bash and Python. Sticking to bash whenever neccessary.
   
-  This is valid syntax in BoomBash.
+This is valid syntax in BoomBash.
   
+#+begin_src emacs-lisp
+(print (+ 3 1 ))
+#+end_src
+  
+#+begin_src emacs-lisp
+(defun greet ( name ) ( output $name ))
+#+end_src
+
+#+begin_src emacs-lisp
+(if (= 3 'hello')
+    (print 'Equal')
+  (print 'Not Equal'))
+#+end_src
+
+** Syntax Elements
+The following syntax elements are currently present
+- Variables
+  You can set variables using the function ~(var name value)~.
+  Example
   #+begin_src emacs-lisp
-(output (+ 3 1 ))
+(var hello 'Hello')
   #+end_src
-  
+- Variable Types
+  Variable Types include integers , boolean , and strings.
+  * Integers are represented by numerals.
+  * Boolean are represented by =true= and =false=
+  * Strings are represented by any value inside single quotes.
+- Retrieving Value
+  You can retrieve value of any variable using the ~(get name)~ function.
+  Or you can use the familiar bash syntax ~$name~.
   #+begin_src emacs-lisp
-(defun greet ( name ) ( output ( get name )))
+(get hello)
+(print $hello)
   #+end_src
+- Functions
+  You can declare functions with the familiar ~(defun name arguments body)~ syntax
+  #+begin_src emacs-lisp
+(defun hello (name)
+  (print $name))
+  #+end_src
+- Inbuilt Functions
+  The Inbuilt functions follow either the Python way or implemented in Bash
+  There are plans to implement bash/coreutils functions .
+  Currently there are functions for comparing and printing.
+
 
 
 ** Current Progress
-   Currently language is still in building phase.
-   Features needed
-   
-   - [ ] Booleans
-   - [ ] Documentation
-   - [ ] More Tests
-   - [ ] Interface with Bash
-   - [ ] Type System
-   - [x] Variable Reference
-   - [x] Support for loading files
-   - [x] Support for Executing Files
+Currently language is still in building phase.
+Features needed
+- [ ] More Bash related functions
+- [ ] More Coreutils function
+- [ ] Threading support ?
+- [ ] Command line arguments
+- [ ] Readline in REPL
+- [x] Booleans( In the =no_exec= and =more-types= branch)
+- [x] Documentation
+- [x] More Tests(In the =more-test= branch)
+- [x] Interface with Bash
+- [x] Type System(In  the =more-types= branch)
+- [x] Variable Reference
+- [x] Support for loading files
+- [x] A simple REPL
+- [x] Support for Executing Files
 
-** The Features include
   
-** Written in Python
+** Usage
+Currently using it means running it using ~python -m boombash~ after cloning the repository.
+This will open a REPL where you can try the language.
+
+For testing just run the ~make test~ command and it will try to run the test.
+
 
     
