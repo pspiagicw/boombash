@@ -1,9 +1,27 @@
 import subprocess
-
 from boombash import print_module, token
 
 
 class Executor:
+    """Class executes the given tree-representation by the parser
+
+    Arguments:
+    variables: A dict mapping known variables with their values
+    functions: A dict mapping known function names with their own instance of Executor
+    code: A variable to parse arbitary syntax-tree without needing parser
+    argument_structure: A variable to store the signature of arguments for a function (Not used until using functions)
+
+    Returns:
+    None
+
+    Takes a parsed syntax-tree structure and executes the code.
+    It determines what to do with the first token in a statement. A statement is defined as a list of tokens.
+    Example:
+    (print 'Hello World') => [print , 'Hello World'] A single statement
+    (+ 1 (* 4 5)) => [+ , 1 [* , 4 , 5]] A statement inside a statement
+
+    Thus [print , 'Hello World'] would make the executor execute the second token in the statement , which here is 'Hello World'.
+    """
     def __init__(
         self, variables=dict(), functions=dict(), code=None, argument_structure=None
     ):
@@ -13,7 +31,19 @@ class Executor:
         self.argument_structure = argument_structure
 
     def exec(self, data=None, args=None):
-        "This function executes arbitary code"
+        """Execute given syntax-tree
+
+        Arguments:
+        data: Tree-structure to execute
+        args: Arguments given to a Executor(Useful when executing a function with arguments)
+
+        Returns:
+        None
+
+        Takes the tree-structure and executes each statement(each leaf of the tree) according to the rules
+        First token is `operator` or instruction , cause it's lisp the order will always be the same.
+
+        """
         if data == None:
             data = self.code
         if isinstance(data, token.Token):

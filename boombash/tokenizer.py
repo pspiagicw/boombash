@@ -2,7 +2,20 @@ from boombash import token
 
 
 class Tokenizer:
-    """This class gives token depending on input"""
+    """Tokenizer creates a stream of tokens from a given input
+
+    It is the most important part of the language.
+    It prepares the tokens on the format provided in `token.py`
+
+    Many people also call it a lexer. It parses through each character
+
+    Every parser has a input , read_position , current_position and EOF.
+
+    input: Simply the earlier given input
+    current_position: The position whose token is being tokenized
+    read_position: The position ahead which would be used to predict token type
+    EOF: Signals whether the input has reached the end.
+    """
 
     def __init__(self, input):
         self.input = input
@@ -11,12 +24,14 @@ class Tokenizer:
         self.EOF = False
 
     def move_position(self):
+        """Increment the position of internal pointers """
         self.current_position = self.read_position
         self.read_position += 1
         if self.current_position == len(self.input):
             self.EOF = True
 
     def eat_space(self):
+        """Ignore newline/space/tabs and other syntactic helpers"""
         char = None
         if not self.EOF:
             char = self.input[self.current_position]
@@ -34,6 +49,21 @@ class Tokenizer:
                 char = self.input[self.current_position]
 
     def next_token(self):
+        """Return the next lexed token
+
+        Returns
+        token: A object of Token class
+
+        This method is the heart of the Lexer/Tokenizer which reads a single character and decides the token type.
+        If any of the major unary symbols `(` or `)` or `+` or `-` simply parse the single character and move to next token.
+
+        If encountering a binary symbol `>=` or `<=` checks the next character and decides accordingly
+
+        If encountering a numerical symbol extracts the entire multi-digit number using helper functions
+        The same for encountering a word , then decides if it is a reserved token (if , while , for , gt) then
+        makes a new token type. Else considers it a IDENT(variable or literal value).
+
+        """
         self.move_position()
         self.eat_space()
         if self.EOF:
@@ -75,6 +105,10 @@ class Tokenizer:
                 token_instance = token.Token(Type=token.LE, Literal=ident)
             elif ident == token.GE:
                 token_instance = token.Token(Type=token.GE, Literal=ident)
+            elif ident == token.TRUE:
+                token_instance = token.Token(Type=token.TRUE , Literal = ident)
+            elif ident == token.FALSE:
+                token_instance = token.Token(Type=token.FALSE , Literal = ident)
             else:
                 token_instance = token.Token(Type=token.IDENT, Literal=ident)
         elif char.isnumeric():
@@ -94,6 +128,7 @@ class Tokenizer:
         return token_instance
 
     def read_string(self):
+        """Process the consecutive alphbetical character between single quotes as a single word"""
         oldposition = self.read_position
         char = self.input[self.read_position]
         while char != "'" and self.read_position < len(self.input):
@@ -103,6 +138,7 @@ class Tokenizer:
         return string
 
     def read_identifier(self):
+        """Process the consecutive alphabetical character as single word"""
         oldposition = self.current_position
         char = self.input[self.current_position]
         while char.isalpha() and self.read_position < len(self.input):
@@ -115,6 +151,7 @@ class Tokenizer:
         return ident
 
     def read_variable(self):
+        """Process the consecutive alphabetical character with $ symbol as a variable name"""
         oldposition = self.current_position
         char = self.input[self.current_position]
         while (char.isalpha() or char == "$") and self.read_position < len(self.input):
@@ -127,6 +164,7 @@ class Tokenizer:
         return ident
 
     def read_number(self):
+        """Process the consecutive numeric character as a single multi-digit number"""
         oldposition = self.current_position
         char = self.input[self.current_position]
         while char.isnumeric() and self.read_position < len(self.input):
