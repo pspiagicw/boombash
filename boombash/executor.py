@@ -44,52 +44,58 @@ class Executor:
         First token is `operator` or instruction , cause it's lisp the order will always be the same.
 
         """
-        if data == None:
+        if not data:
             data = self.code
         if isinstance(data, token.Token):
             if data.Type == token.RETRIEVE:
                 return self.exec(self.variables[data.Literal])
             else:
-                return data.Literal
+                return data
         if self.argument_structure:
             assert len(self.argument_structure) == len(args), "No of arguments differ"
             for i in range(len(args)):
-                self.variables[self.exec(self.argument_structure[i])] = args[i]
+                self.variables[self.exec(self.argument_structure[i]).Literal] = args[i]
         operator = data[0]
         if operator.Type == token.PLUS:
             assert len(data) == 3, "Add function expects 2 arguments only"
-            return int(self.exec(data[1], args=args)) + int(
-                self.exec(data[2], args=args)
-            )
+            # return int(self.exec(data[1], args=args)) + int(
+            #     self.exec(data[2], args=args)
+            # )
+            return self.exec(data[1]) + self.exec(data[2])
         if operator.Type == token.MINUS:
             assert len(data) == 3, "Minus function expects 2 arguments only"
-            return int(self.exec(data[1], args=args)) - int(
-                self.exec(data[2], args=args)
-            )
+            # return int(self.exec(data[1], args=args)) - int(
+            #     self.exec(data[2], args=args)
+            # )
+            return self.exec(data[1]) - self.exec(data[2])
         if operator.Type == token.MULTIPLY:
             assert len(data) == 3, "Multiply function expects 2 arguments only"
-            return int(self.exec(data[1], args=args)) * int(
-                self.exec(data[2], args=args)
-            )
+            # return int(self.exec(data[1], args=args)) * int(
+            #     self.exec(data[2], args=args)
+            # )
+            return self.exec(data[1]) * self.exec(data[2])
         if operator.Type == token.DIVIDE:
             assert len(data) == 3, "Divide function expects 2 arguments only"
-            return int(self.exec(data[1], args=args)) / int(
-                self.exec(data[2], args=args)
-            )
+            # return int(self.exec(data[1], args=args)) / int(
+            #     self.exec(data[2], args=args)
+            # )
+            return self.exec(data[1]) / self.exec(data[2])
+
         if operator.Type == token.MOD:
             assert len(data) == 3, "Modulus function expects 2 arguments only"
-            return int(self.exec(data[1], args=args)) % int(
-                self.exec(data[2], args=args)
-            )
+            # return int(self.exec(data[1], args=args)) % int(
+            #     self.exec(data[2], args=args)
+            # )
+            return self.exec(data[1]) % self.exec(data[2])
         if operator.Type == token.PRINT:
             assert len(data) == 2, "Type function expects 1 argument"
             print_module.stdout(self.exec(data[1], args=args))
         if operator.Type == token.EQ:
             assert len(data) == 3, "Eq function expects 2 arguments"
-            return self.exec(data[1]) == self.exec(data[2], args=args)
+            return self.exec(data[1] , args=args) == self.exec(data[2], args=args)
         if operator.Type == token.IF:
             assert len(data) == 4, "If function expects 3 arguments"
-            if self.exec(data[1]) == True:
+            if (self.exec(data[1]) == token.Token._make_true_token()).Type == token.TRUE:
                 self.exec(data[2], args=args)
             else:
                 self.exec(data[3], args=args)
@@ -99,23 +105,23 @@ class Executor:
                 self.exec(data[2], args=args)
         if operator.Type == token.VAR:
             assert len(data) == 3, "Var function expects 2 arguments"
-            self.variables[self.exec(data[1])] = self.exec(data[2], args=args)
+            self.variables[data[1].Literal] = self.exec(data[2], args=args)
         if operator.Type == token.GET:
             assert len(data) == 2, "Get function expects 1 arguments"
-            return self.exec(self.variables[self.exec(data[1], args=args)])
+            return self.exec(self.variables[self.exec(data[1], args=args).Literal])
         if operator.Type == token.DEFUN:
             assert len(data) == 4, "Function expects 3 arguments"
             for arg in data[2]:
                 assert (
                     isinstance(arg, list) == False
                 ), "Argument should be only name of variables"
-            self.functions[self.exec(data[1])] = Executor(
+            self.functions[data[1].Literal] = Executor(
                 self.variables, self.functions, data[3], argument_structure=data[2]
             )
         if operator.Type == token.IDENT:
-            if self.exec(operator) in self.functions:
+            if operator.Literal in self.functions:
                 self.functions
-                self.functions[self.exec(operator)].exec(args=data[1:])
+                self.functions[operator.Literal].exec(args=data[1:])
         if operator.Type == token.EX:
             command = list()
             for i in data[1:]:

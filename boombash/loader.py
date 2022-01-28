@@ -2,6 +2,17 @@ from boombash import executor, parser, token, tokenizer
 
 
 def load(filename):
+    """Load the given file into current session
+
+    Arguments:
+    filename: The filename to load , will only search in the current directory
+
+    Returns:
+    None
+
+    It reads the file and does the standard procedure(Tokenize , Parse and Execute).
+    Only used when executing a file , is not designed for importing stuff
+    """
     data = None
     with open(filename) as inputfile:
         data = inputfile.read()
