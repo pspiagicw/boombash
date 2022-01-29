@@ -17,11 +17,11 @@
    Currently language is still in building phase.
    Features needed
    
-   - [ ] Booleans
-   - [ ] Documentation
    - [ ] More Tests
    - [ ] Interface with Bash
-   - [ ] Type System
+   - [x] Booleans
+   - [x] Documentation
+   - [x] Type System
    - [x] Variable Reference
    - [x] Support for loading files
    - [x] Support for Executing Files

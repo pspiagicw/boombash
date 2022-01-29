@@ -100,12 +100,12 @@ class Token:
         if other.Type == self.Type == INT:
             return Token(
                 Type = INT,
-                Literal = int(other.Literal) + int(self.Literal)
+                Literal = int(self.Literal) + int(other.Literal)
             )
         if other.Type == self.Type == STRING:
             return Token(
                 Type = STRING,
-                Literal = other.Literal + self.Literal
+                Literal = self.Literal + other.Literal
             )
     def __sub__(self,other):
         "Multiplies the two tokens, only if integer"
